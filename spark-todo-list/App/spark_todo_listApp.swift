@@ -11,7 +11,7 @@ import SwiftUI
 struct spark_todo_listApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DashboardView()
         }
     }
 }
