@@ -37,7 +37,13 @@ class AddTaskViewModel: ObservableObject {
     func saveTask() {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
-        let newTask = Task(title: title, description: description, deadline: deadline, isCompleted: false, category: category)
+        // Convert deadline to device timezone
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: deadline)
+        let localDeadline = calendar.date(from: components) ?? deadline
+        print(deadline)
+        print(localDeadline)
+        let newTask = Task(title: title, description: description, deadline: localDeadline, isCompleted: false, category: category)
         tasks.append(newTask)
         fileManagerService.saveToFile(tasks: tasks)
         

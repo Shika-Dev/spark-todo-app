@@ -51,6 +51,7 @@ struct AddTaskView: View {
                     CategoryDropdown(viewModel: viewModel)
                     
                     Button(action: {
+                        print($viewModel.deadline)
                         viewModel.saveTask()
                     }){
                         Text("Add Task")
@@ -94,7 +95,7 @@ struct CustomDatePicker : View {
     @Binding var date: Date
     let hint: String
     var body: some View {
-        DatePicker(hint, selection: $date, displayedComponents: .date)
+        DatePicker(hint, selection: $date, displayedComponents: [.date, .hourAndMinute])
             .foregroundStyle(Color(hex: "#000000"))
             .padding()
             .background(
